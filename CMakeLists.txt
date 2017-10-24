@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(uvc_ros_driver)
 
-# if traget is an ARM processor uncomment this line to compile with NEON instruction
-# set(NEON_FLAGS "-DENABLE_NEON -mfloat-abi=hard -mfpu=neon-vfpv4 -mcpu=cortex-a15 -Ofast")
+# Check if Neon instructions are available.
+include(cmake/FindARM.cmake)
+
+if (NEON_FOUND)
+  set(NEON_FLAGS "-DENABLE_NEON -mfloat-abi=hard -mfpu=neon-vfpv4 -mcpu=cortex-a15 -Ofast")
+endif(NEON_FOUND)
 set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} -Wno-format-security ${NEON_FLAGS}")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${NEON_FLAGS}")
 
@@ -40,6 +44,9 @@ add_definitions(${EIGEN3_DEFINITIONS})
 
 # Add dynamic reconfigure API.
 generate_dynamic_reconfigure_options(cfg/uvc_ros_driver_node.cfg)
+
+# Find LibUVC.
+find_package(libuvc REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -164,9 +171,7 @@ add_library(uvc_ros_driver SHARED
 target_link_libraries(uvc_ros_driver
   yaml-cpp
   ${catkin_LIBRARIES}
-  #${LibUVC_LIBRARIES}
-  /usr/local/lib/libuvc.so #TODO link by usign find_package
-  ${YamlCpp_LIBRARIES}
+  ${libuvc_LIBRARIES}
 )
 
 ## Add cmake target dependencies of the library

@@ -856,9 +856,7 @@ inline void uvcROSDriver::deinterleave(const uint8_t *mixed, uint8_t *array1,
 		i += 16;
 		mixed += 32;
 	}
-
-#endif
-
+#else
 	while (c < imageWidth * imageHeight) {
 		array1[c] = mixed[2 * i];
 		array2[c] = mixed[2 * i + 1];
@@ -869,6 +867,7 @@ inline void uvcROSDriver::deinterleave(const uint8_t *mixed, uint8_t *array1,
 			i += 16;
 		}
 	}
+#endif
 }
 
 ////////////////////////////////////////////////////////////////////////////////
