@@ -680,6 +680,7 @@ void uvcROSDriver::setCalibration(CameraParameters camParams)
 	setParam("SETCALIB", float(set_calibration_));
 
 	// std::cout << "Configuring cameras..." << std::endl;
+	setParam("ADIS_IMU", 1.0f);
 	setParam("RESETMT9V034", 1.0f);
 	setParam("RESETICM20608",1.0f);
 	// sleep(5);  // needed, fpga reconfigure cameras and restart time
@@ -896,7 +897,8 @@ void uvcROSDriver::uvc_cb(uvc_frame_t *frame)
 
     // Static vars are initialized only in the first run. Calculate time offset between current time (ros::Time::now())
     // of host and substract current timestamp of device, as this timestamp depends on the powered on time of the device
-	static ros::Duration time_offset_frame(0.041);
+	// static ros::Duration time_offset_frame(0.041);
+	static ros::Duration time_offset_frame(0.0);
 	static ros::Time fpga_frame_time = ros::Time::now() - time_offset_frame - ros::Duration(double(timestamp/k_ms_to_sec)); //subtract first timestamp
 	static ros::Time fpga_line_time = ros::Time::now() - ros::Duration(double(timestamp/k_ms_to_sec));
 	ros::Duration fpga_time_add(0.0);
@@ -1074,7 +1076,7 @@ void uvcROSDriver::uvc_cb(uvc_frame_t *frame)
 		     (size_t)frame_size, frame->width - 16, frame->height);
 
 	sensor_msgs::fillImage(msg_vio.left_image,
-			       sensor_msgs::image_encodings::BAYER_RGGB8,//MONO8,//
+			       sensor_msgs::image_encodings::MONO8,//BAYER_RGGB8,//
 			       frame->height,      // height
 			       frame->width - 16,  // width
 			       frame->width - 16,  // stepSize
