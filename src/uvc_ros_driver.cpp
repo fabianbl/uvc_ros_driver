@@ -112,7 +112,7 @@ void uvcROSDriver::initDevice()
 {
 	// initialize serial port
 	// sp_ = Serial_Port("/dev/ttyUSB0", 115200);
-	sp_ = Serial_Port("/dev/serial/by-id/usb-Cypress_FX3-if02", 115200);
+	sp_ = Serial_Port("/dev/serial/by-id/usb-Cypress_FX3_012345678901-if02", 115200);
 
         bool first_fault = true;
 	int open = 0;
