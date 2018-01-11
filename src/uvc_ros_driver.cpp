@@ -689,6 +689,10 @@ void uvcROSDriver::setCalibration(CameraParameters camParams)
 	// pairs
 	//setParam("CAMERA_ENABLE", float(camera_config_));
 
+	// TODO(fabianbl): Some images are flipped without this parameter, find
+	// out why.
+	setParam("UPDATEMT9V034", 1.0f);
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
