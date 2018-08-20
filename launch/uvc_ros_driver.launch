@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="numberOfCameras" default="2" />
+  <arg name="numberOfCameras" default="10" />
   <!-- calibrationMode 0 no calibration, 1: calibration for 1 camera pair,
       2: calibration for 2 camera pairs and so on -->
   <arg name="calibrationMode" default="0" />
@@ -15,6 +15,6 @@
     <rosparam command="load" file="$(find uvc_ros_driver)/params/homography_mapping.yaml" />
   </node>
   
-  <node pkg="dynamic_reconfigure" name="reconfigure_node_0" type="dynparam" args="load /uvc_camera $(find uvc_ros_driver)/launch/rqt_config/param_config.yaml" output="screen"/>
+  <node pkg="dynamic_reconfigure" name="reconfigure_node_0" type="dynparam" args="load /uvc_camera $(find uvc_ros_driver)/launch/rqt_config/param_config_schindler.yaml" output="screen"/>
 
 </launch>
