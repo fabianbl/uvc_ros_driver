@@ -160,7 +160,7 @@ void StereoHomography::getHomography(Eigen::Matrix3d &H0, Eigen::Matrix3d &H1,
 
 	Eigen::Matrix3d r_1(Eigen::AngleAxisd(om.norm() / (-2.0), om.normalized()));
 
-	double zoom = 30.0;
+	double zoom = 45.0;
 
 	if (om.norm() == 0) {
 		r_1.setIdentity();
@@ -215,7 +215,7 @@ void StereoHomography::getHomography(Eigen::Matrix3d &H0, Eigen::Matrix3d &H1,
 	double f_y_new;
 	//focal length depending on the used distortion models
 	if(equi_model0_ || equi_model1_){
-		f_y_new  = (f0_[0]+f0_[1]+f1_[0]+f1_[1])/4-90;//+zoom;
+		f_y_new  = (f0_[0]+f0_[1]+f1_[0]+f1_[1])/4-90+zoom;
 	}
 	else{
 		double f0_y_new;

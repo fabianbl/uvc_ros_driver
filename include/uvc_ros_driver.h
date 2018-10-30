@@ -236,12 +236,14 @@ public:
 
 		switch (n_cameras) {
 		case 10:
-			// camera_config_ = 0x01F;
-			camera_config_ = 0x3FF;
+			//camera_config_ = 0x01F;
+			//camera_config_ = 0x3FF;
+			camera_config_ = 0x1DF;
 			break;
 		case 8:
 			//camera_config_ = 0x00F;
-			camera_config_ = 0x1EF;
+			//camera_config_ = 0x1EF;
+			camera_config_ = 0x14F;
 			break;
 
 		case 6:

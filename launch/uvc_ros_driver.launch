@@ -1,11 +1,11 @@
 <launch>
 
-  <arg name="numberOfCameras" default="10" />
+  <arg name="numberOfCameras" default="8" />
   <!-- calibrationMode 0 no calibration, 1: calibration for 1 camera pair,
       2: calibration for 2 camera pairs and so on -->
   <arg name="calibrationMode" default="0" />
   <!-- calibration file in folder calib -->
-  <arg name="cameraConfigFile" default="/media/camera/calibration.yaml" />
+  <arg name="cameraConfigFile" default="/home/schindler/data/20181030_calibration/calibration_01_23_45_67.yaml" />
 
   <!-- camera node -->
   <node pkg="uvc_ros_driver" name="uvc_camera" type="uvc_ros_driver_node" output="screen">
